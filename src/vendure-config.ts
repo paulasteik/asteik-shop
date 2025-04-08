@@ -11,7 +11,7 @@ import 'dotenv/config';
 import path from 'path';
 
 const IS_DEV = process.env.APP_ENV === 'dev';
-const serverPort = +process.env.PORT || 3000;
+const serverPort = +(process.env.PORT || 3000);
 
 export const config: VendureConfig = {
     apiOptions: {
@@ -45,6 +45,11 @@ export const config: VendureConfig = {
         migrations: [path.join(__dirname, './migrations/*.+(js|ts)')],
         logging: false,
         url: process.env.DATABASE_URL, 
+        database: process.env.DB_NAME,
+        host: process.env.DB_HOST,
+        port: +(process.env.DB_PORT || 5432),
+        username: process.env.DB_USERNAME,
+        password: process.env.DB_PASSWORD,
         extra: {
             ssl: {
                 require: true,
